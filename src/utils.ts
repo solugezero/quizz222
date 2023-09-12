@@ -1,0 +1,1 @@
+export const getFixed = (val: string | number, rounding: number = 2) => parseFloat(Number(val).toFixed(rounding))

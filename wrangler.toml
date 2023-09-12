@@ -1,0 +1,5 @@
+name = "quizapp"
+compatibility_date = "2023-03-24"
+
+[env.dev]
+name = "quizapp-dev"
