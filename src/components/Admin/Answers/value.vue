@@ -1,20 +1,17 @@
 <template>
     <div class="answers-default">
-        {{state}} {{ question }}
-        <p class="answers-default__title">Ответы к стандартной игре</p>
+        <p class="answers-default__title">Ответ к супер игре</p>
         <div class="answers-default_content zx">
-            <div class="answers-default_item" v-for="(answer, idx) in state" :key="`answer--default__${idx}`">
-                <el-input></el-input>
-            </div>
+            <el-input v-model="inputState"></el-input>
         </div>
-        <UIButton @click="handleAddAnswer()">Добавить ответ</UIButton>
+        <UIButton @click="handleSaveQuestion()">Сохранить ответ к супер-игре</UIButton>
     </div>
 </template>
 
 <script setup>
 import { useAdminStore } from '~/store/admin';
 const adminStore = useAdminStore()
-const { deleteAnswer, saveAnswer, updateAnswer } = useAdminStore()
+const { deleteAnswer, saveAnswer, updateAnswer, updateQeustion } = useAdminStore()
 const props = defineProps({
     options: {
         type: Array
@@ -25,7 +22,15 @@ const props = defineProps({
 })
 
 const state = ref([])
+const questionState = ref({})
 const stateCorrectIndex = ref(-1)
+const inputState = ref("")
+
+watch(() => inputState.value, () => {
+    for (let i = 0; i < inputState.value.length; i++) {
+        questionState.value.meta.value[i].answer = inputState.value[i]
+    }
+})
 
 const handleChangeValidAnswer = (answer, idx) => {
     if (stateCorrectIndex.value === idx) {
@@ -41,6 +46,10 @@ const handleChangeValidAnswer = (answer, idx) => {
         state.value[idx].isCorrect = true
         stateCorrectIndex.value = idx
     }
+}
+
+const handleSaveQuestion = async () => {
+    await updateQeustion(questionState.value)
 }
 
 const handleSaveAnswer = async (answer, idx) => {
@@ -84,6 +93,14 @@ watch(() => props.options, () => {
     if (props.options) {
         state.value = props.options
         stateCorrectIndex.value = state.value.findIndex(item => item?.isCorrect)
+    }
+}, {
+    immediate: true
+})
+
+watch(() => props.question, () => {
+    if (props.question) {
+        questionState.value = props.question
     }
 }, {
     immediate: true
