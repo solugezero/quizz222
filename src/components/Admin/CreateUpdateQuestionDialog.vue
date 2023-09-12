@@ -1,13 +1,13 @@
 <template>
     <div class="create-update-dialog dialog">
-        <pre>{{ state.meta?.image }}</pre>
         <div class="dialog_header">
             <p @click="handleUpdateImage()" class="dialog_header__delete-image">X</p>
             <img v-if="getValidImage.src" class="dialog_header__image" :src="getValidImage?.src" alt="">
             <div class="dialog_header_upload" v-else>
-                <UIInputfiles @change="hasNewImage = true" v-model="state.meta.image" />
+                <UIInputfiles @change="hasNewImage = true" @error="data => imageError = data" />
                 <div class="dialog_header_upload_content">
                     <p class="dialog_header_upload_content__subtitle">Необходимый размер изображения: 680х256</p>
+                    <p v-if="imageError" style="color: red;">Изображение неверного размера!</p>
                 </div>
             </div>
         </div>
@@ -50,6 +50,7 @@ const props = defineProps({
         default: false
     }
 })
+const imageError = ref(false)
 const stateAnswers = computed(() => getAnswersById(state.value.id) || [])
 const state = ref({
     id: undefined,
@@ -64,7 +65,6 @@ const state = ref({
     },
 })
 const typeOptions = ref([
-    { title: 'Все', idx: "ALL" },
     { title: 'Стандартный', id: "DEFAULT" },
     { title: 'Позиция', id: "POSITION" },
     { title: 'Супер-игра', id: "VALUE" },
@@ -81,6 +81,25 @@ watch(() => props.question, () => {
 }, {
     immediate: true
 })
+
+// const handleUploadImage = (file) => {
+//     const img = document.createElement("img")
+//     const selectedImage = file
+
+//     const objectURL = URL.createObjectURL(selectedImage)
+//     img.onload = function handleLoad() {
+//         if (img.width < 680 || img.height < 256) {
+//             imageError.value = true
+//             state.value.meta.image = ''
+//         } else {
+//             state.value.meta.image = file
+//             imageError.value = false
+//         }
+
+//         URL.revokeObjectURL(objectURL)
+//     }
+//     img.src = objectURL
+// }
 
 const handleUpdateCreateQuestion = async () => {
     if (props.createMode) {

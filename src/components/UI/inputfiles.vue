@@ -13,7 +13,7 @@
 <script setup>
 import { UploadFilled } from "@element-plus/icons-vue"
 
-const emit = defineEmits(["update:modelValue", "change"])
+const emit = defineEmits(["update:modelValue", "change", "error"])
 const input = ref(null)
 const state = ref({
     file: undefined,
@@ -28,8 +28,27 @@ const onUpload = (event) => {
     const uploadedFile = event.target.files[0]
     state.value.src = URL.createObjectURL(uploadedFile)
     state.value.file = uploadedFile
-    emit("update:modelValue", state.value.file)
-    emit("change", state.value.file)
+
+    const img = document.createElement("img")
+    const selectedImage = uploadedFile
+
+    const objectURL = URL.createObjectURL(selectedImage)
+    img.onload = function handleLoad() {
+        if (img.width < 680 || img.height < 256) {
+            state.value.file = ''
+            state.value.src = ''
+            emit("update:modelValue", state.value.file)
+            emit("change", state.value.file)
+            emit("error", true)
+        } else {
+            emit("update:modelValue", state.value.file)
+            emit("change", state.value.file)
+            emit("error", false)
+        }
+
+        URL.revokeObjectURL(objectURL)
+    }
+    img.src = objectURL
 }
 
 const onDelete = () => {
