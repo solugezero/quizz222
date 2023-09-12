@@ -46,7 +46,15 @@ export const useAdminStore = defineStore("admin", {
       try {
         const response = await questionCreate(state);
         if (response) {
-          await this.questionImageUpload(response.id, state.meta.image);
+          const uploadedImage = await this.questionImageUpload(
+            response.id,
+            state.meta.image
+          );
+          const updatedQuestion = {
+            ...response,
+            meta: { ...response.meta, image: uploadedImage.meta.image },
+          };
+          await this.updateQeustion(updatedQuestion);
           await this.featchQuestions();
         } else alert("ERROR SAVE QUESTION");
         return response;
@@ -59,8 +67,17 @@ export const useAdminStore = defineStore("admin", {
       try {
         const response = await questionUpdate(state.id, state);
         if (response) {
-          if (newImage)
-            await this.questionImageUpload(response.id, state.meta.image);
+          if (newImage) {
+            const uploadedImage = await this.questionImageUpload(
+              response.id,
+              state.meta.image
+            );
+            const updatedQuestion = {
+              ...response,
+              meta: { ...response.meta, image: uploadedImage.meta.image },
+            };
+            await this.updateQeustion(updatedQuestion, false);
+          }
           await this.featchQuestions();
         } else alert("ERROR UPDATE QUESTION");
         return response;

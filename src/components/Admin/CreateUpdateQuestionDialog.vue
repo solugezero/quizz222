@@ -4,7 +4,7 @@
             <p @click="handleUpdateImage()" class="dialog_header__delete-image">X</p>
             <img v-if="getValidImage.src" class="dialog_header__image" :src="getValidImage?.src" alt="">
             <div class="dialog_header_upload" v-else>
-                <UIInputfiles @change="hasNewImage = true" @error="data => imageError = data" />
+                <UIInputfiles @change="hasNewImage = true" v-model="state.meta.image" @error="data => imageError = data" />
                 <div class="dialog_header_upload_content">
                     <p class="dialog_header_upload_content__subtitle">Необходимый размер изображения: 680х256</p>
                     <p v-if="imageError" style="color: red;">Изображение неверного размера!</p>
@@ -33,6 +33,7 @@ import { UploadFilled } from "@element-plus/icons-vue"
 import AnswersDefault from "~/components/Admin/Answers/default.vue"
 import AnswersPosition from "~/components/Admin/Answers/position.vue"
 import AnswersValue from "~/components/Admin/Answers/value.vue"
+import CreateUpdateQuestionDialog from "./CreateUpdateQuestionDialog.vue"
 import { useAdminStore } from "~/store/admin";
 import { useModalStore } from "~/store/modal";
 
@@ -82,29 +83,10 @@ watch(() => props.question, () => {
     immediate: true
 })
 
-// const handleUploadImage = (file) => {
-//     const img = document.createElement("img")
-//     const selectedImage = file
-
-//     const objectURL = URL.createObjectURL(selectedImage)
-//     img.onload = function handleLoad() {
-//         if (img.width < 680 || img.height < 256) {
-//             imageError.value = true
-//             state.value.meta.image = ''
-//         } else {
-//             state.value.meta.image = file
-//             imageError.value = false
-//         }
-
-//         URL.revokeObjectURL(objectURL)
-//     }
-//     img.src = objectURL
-// }
-
 const handleUpdateCreateQuestion = async () => {
     if (props.createMode) {
         await saveQuestion(state.value).then(data => {
-            if (data) modalStore.close()
+            modalStore.open(CreateUpdateQuestionDialog, { createMode: false, question: data })
         })
     } else {
         await updateQeustion(state.value, hasNewImage.value).then(data => {
