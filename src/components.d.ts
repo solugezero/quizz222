@@ -7,11 +7,9 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    AdminAnswer: typeof import('./components/Admin/Answer.vue')['default']
     AdminAnswersDefault: typeof import('./components/Admin/Answers/default.vue')['default']
     AdminAnswersPosition: typeof import('./components/Admin/Answers/position.vue')['default']
     AdminAnswersValue: typeof import('./components/Admin/Answers/value.vue')['default']
-    AdminAnswersvueDefault: typeof import('./components/Admin/Answers.vue/default.vue')['default']
     AdminCreateUpdateQuestionDialog: typeof import('./components/Admin/CreateUpdateQuestionDialog.vue')['default']
     AdminOldAnswer: typeof import('./components/Admin/old/Answer.vue')['default']
     AdminOldCreateUpdateQuestionDialog: typeof import('./components/Admin/old/CreateUpdateQuestionDialog.vue')['default']
@@ -19,24 +17,15 @@ declare module '@vue/runtime-core' {
     AdminOldQuestionCard: typeof import('./components/Admin/old/QuestionCard.vue')['default']
     AdminOldQyestionCardLoading: typeof import('./components/Admin/old/QyestionCardLoading.vue')['default']
     AdminOldValue: typeof import('./components/Admin/old/Value.vue')['default']
-    AdminQuestion: typeof import('./components/Admin/Question.vue')['default']
     AdminQuestionCard: typeof import('./components/Admin/QuestionCard.vue')['default']
-    AdminQyestionCardLoading: typeof import('./components/Admin/QyestionCardLoading.vue')['default']
-    AdminValue: typeof import('./components/Admin/Value.vue')['default']
     ContentHelp: typeof import('./components/Content/Help.vue')['default']
-    copy: typeof import('./components/Admin/Answers.vue/default copy.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
-    ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
-    ElCol: typeof import('element-plus/es')['ElCol']
     ElDialog: typeof import('element-plus/es')['ElDialog']
     ElIcon: typeof import('element-plus/es')['ElIcon']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElRadio: typeof import('element-plus/es')['ElRadio']
     ElRadioButton: typeof import('element-plus/es')['ElRadioButton']
     ElRadioGroup: typeof import('element-plus/es')['ElRadioGroup']
-    ElRow: typeof import('element-plus/es')['ElRow']
-    ElTag: typeof import('element-plus/es')['ElTag']
-    ElUpload: typeof import('element-plus/es')['ElUpload']
     GameGuideModal: typeof import('./components/Game/GuideModal.vue')['default']
     GameQuestion: typeof import('./components/Game/Question.vue')['default']
     IconActive: typeof import('./components/Icon/Active.vue')['default']
@@ -137,6 +126,5 @@ declare module '@vue/runtime-core' {
     UIInputfiles: typeof import('./components/UI/inputfiles.vue')['default']
     UIModal: typeof import('./components/UI/modal.vue')['default']
     UIRadioButtons: typeof import('./components/UI/radio-buttons.vue')['default']
-    UISwitch: typeof import('./components/UI/switch.vue')['default']
   }
 }

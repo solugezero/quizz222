@@ -56,7 +56,7 @@ onMounted(async () => {
   <div h-full flex all:transition-400>
     <div ma class="scroll-x">
       <div
-        class="grid xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-2"
+        class="grid xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-2 gap-30px"
       >
         <div v-for="(question, idx) in getQuestionsByFilters">
           <LazyCompQuestionCard :question="question" :key="idx" />
