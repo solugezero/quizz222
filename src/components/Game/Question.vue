@@ -655,6 +655,8 @@ const cardHaveImage = computed(() => props?.question?.meta?.image ? true : false
 }
 
 .fullvhcard {
-	min-height: 100vh !important;
+	@media (max-height: 844px) and (max-width: 600px) {
+		min-height: 100vh !important;
+	}
 }
 </style>
