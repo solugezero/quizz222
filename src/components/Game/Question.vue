@@ -277,7 +277,7 @@
 	<div class="flex flex-col w-screen items-center max-h-90vh relative z-1">
 		<div
 			v-if="question.meta && !question.meta.easy"
-			class="flex items-center gap-x-9px scale-90 sm:hidden w-100%"
+			class="flex items-center  scale-90 sm:hidden w-100%"
 			:class="{ 'pointer-events-none!': answerEmitting }"
 		>
 			<div class="timer bg-white lt-xxxl:h-55px! lt-xxxl:max-w-310px q-shadow-sm lt-xxxl:p-10px!">
@@ -286,7 +286,7 @@
 					src="/img/clock.png"
 					alt="таймер"
 				/>
-				<div class="time lt-xxxl:h-13px! lt-xxxl:w-220px! lt-xxxl:min-w-220px! bg-#D1EAD8!">
+				<div class="time lt-xxxl:h-13px! lt-xxxl:w-90%! lt-xxxl:min-w-80%! bg-#D1EAD8!">
 					<div
 						v-if="question.type !== 'VALUE'"
 						class="inner h-full bg-#71CB8A trs"
@@ -312,24 +312,24 @@
 					{{ totalGameTime - time }}
 				</p>
 			</div>
-			<div class="flex-1"></div>
+			<div style="width: 3.2vw;"></div>
+			<div
+				v-if="question.type !== 'VALUE'"
+				class="bg-white w-98px lt-xxxl:w-76px lt-xxxl:h-55px! py-12px border-2px border-#C9C9C9 flex flex-col items-center justify-center q-shadow-sm"
+			>
+				<p class="text-22px lt-xxxl:text-16px font-500 text-#1E2947 leading-130%">+{{ totalGameTime }}</p>
+				<p class="text-18px lt-xxxl:text-14px text-#C9C9C9 leading-130% mt-2px">доп.сек</p>
+			</div>
+			<div style="width: 3.2vw;"></div>
+
 			<div class="bg-white w-98px lt-xxxl:w-76px lt-xxxl:h-55px! py-12px border-2px border-#C9C9C9 flex flex-col items-center justify-center q-shadow-sm">
 				<p class="text-22px lt-xxxl:text-16px font-500 text-#1E2947 leading-130%">{{ currentPoints }}</p>
 				<p class="text-18px lt-xxxl:text-14px text-#C9C9C9 leading-130% mt-2px">баллы</p>
 			</div>
-			<template v-if="!question.meta && !question.meta.easy">
-				<div
-					v-if="question.type !== 'VALUE'"
-					class="bg-white w-98px lt-xxxl:w-76px lt-xxxl:h-55px! py-12px border-2px border-#C9C9C9 flex flex-col items-center justify-center q-shadow-sm"
-				>
-					<p class="text-22px lt-xxxl:text-16px font-500 text-#1E2947 leading-130%">+{{ totalGameTime }}</p>
-					<p class="text-18px lt-xxxl:text-14px text-#C9C9C9 leading-130% mt-2px">доп.сек</p>
-				</div>
-			</template>
 		</div>
 		<div
 			v-if="question.meta && question.meta.easy"
-			class="flex items-center gap-x-9px scale-90 sm:hidden w-full"
+			class="flex items-center  scale-90 sm:hidden w-full"
 			:class="{ 'pointer-events-none!': answerEmitting }"
 		>
 			<div
@@ -341,20 +341,21 @@
 					class="w-46px h-30px"
 				/>
 			</div>
-			<div class="flex-1"></div>
+			<div style="width: 3.2vw;"></div>
+
+			<div
+				v-if="question.type !== 'VALUE'"
+				class="bg-white w-98px lt-xxxl:w-76px lt-xxxl:h-55px! py-12px border-2px border-#C9C9C9 flex flex-col items-center justify-center q-shadow-sm"
+			>
+				<p class="text-22px lt-xxxl:text-16px font-500 text-#1E2947 leading-130%">+{{ totalGameTime }}</p>
+				<p class="text-18px lt-xxxl:text-14px text-#C9C9C9 leading-130% mt-2px">доп.сек</p>
+			</div>
+			<div style="width: 3.2vw;"></div>
+
 			<div class="bg-white w-98px lt-xxxl:w-76px lt-xxxl:h-55px! py-12px border-2px border-#C9C9C9 flex flex-col items-center justify-center q-shadow-sm">
 				<p class="text-22px lt-xxxl:text-16px font-500 text-#1E2947 leading-130%">{{ currentPoints }}</p>
 				<p class="text-18px lt-xxxl:text-14px text-#C9C9C9 leading-130% mt-2px">баллы</p>
 			</div>
-			<template v-if="!question.meta && !question.meta.easy">
-				<div
-					v-if="question.type !== 'VALUE'"
-					class="bg-white w-98px lt-xxxl:w-76px lt-xxxl:h-55px! py-12px border-2px border-#C9C9C9 flex flex-col items-center justify-center q-shadow-sm"
-				>
-					<p class="text-22px lt-xxxl:text-16px font-500 text-#1E2947 leading-130%">+{{ totalGameTime }}</p>
-					<p class="text-18px lt-xxxl:text-14px text-#C9C9C9 leading-130% mt-2px">доп.сек</p>
-				</div>
-			</template>
 		</div>
 		<div
 			class="card p-42px lt-xxxl:p-33px pb-48px w-770px lt-xxxl:w-610px lt-xxl:scale-90 lg:scale-100! max-h-[calc(100vh-50px)] scroll-y max-w-full lt-sm:-mt-20px"
@@ -367,7 +368,7 @@
 		>
 			<div
 				v-if="question.meta && !question.meta.easy"
-				class="flex items-center gap-x-9px lt-sm:hidden"
+				class="flex items-center gap-x-12px lt-sm:hidden"
 			>
 				<div class="timer bg-white lt-xxxl:h-55px! lt-xxxl:max-w-310px q-shadow-sm lt-xxxl:p-10px!">
 					<img
@@ -379,12 +380,12 @@
 						<div
 							v-if="question.type !== 'VALUE'"
 							class="inner h-full bg-#71CB8A trs"
-							:style="`width: ${100 - (100 * time) / totalTime}%`"
+							:style="`width: ${85 - (85 * time) / totalTime}%`"
 						></div>
 						<div
 							v-else
 							class="inner h-full bg-#71CB8A trs"
-							:style="`width: ${100 - (100 * time) / totalGameTime}%`"
+							:style="`width: ${85 - (85 * time) / totalGameTime}%`"
 						></div>
 					</div>
 					<!-- TODO: more font -->
@@ -401,24 +402,25 @@
 						{{ totalGameTime - time }}
 					</p>
 				</div>
-				<div class="flex-1"></div>
+				<div style="width: 3.2vw;"></div>
+
+				<div
+					v-if="question.type !== 'VALUE'"
+					class="bg-white w-98px lt-xxxl:w-76px lt-xxxl:h-55px! py-12px border-2px border-#C9C9C9 flex flex-col items-center justify-center q-shadow-sm"
+				>
+					<p class="text-22px lt-xxxl:text-16px font-500 text-#1E2947 leading-130%">+{{ totalGameTime }}</p>
+					<p class="text-18px lt-xxxl:text-14px text-#C9C9C9 leading-130% mt-2px">доп.сек</p>
+				</div>
+				<div style="width: 3.2vw;"></div>
+
 				<div class="bg-white w-98px lt-xxxl:w-76px lt-xxxl:h-55px! py-12px border-2px border-#C9C9C9 flex flex-col items-center justify-center q-shadow-sm">
 					<p class="text-22px lt-xxxl:text-16px font-500 text-#1E2947 leading-130%">{{ currentPoints }}</p>
 					<p class="text-18px lt-xxxl:text-14px text-#C9C9C9 leading-130% mt-2px">баллы</p>
 				</div>
-				<template v-if="!question.meta && !question.meta.easy">
-					<div
-						v-if="question.type !== 'VALUE'"
-						class="bg-white w-98px lt-xxxl:w-76px lt-xxxl:h-55px! py-12px border-2px border-#C9C9C9 flex flex-col items-center justify-center q-shadow-sm"
-					>
-						<p class="text-22px lt-xxxl:text-16px font-500 text-#1E2947 leading-130%">+{{ totalGameTime }}</p>
-						<p class="text-18px lt-xxxl:text-14px text-#C9C9C9 leading-130% mt-2px">доп.сек</p>
-					</div>
-				</template>
 			</div>
 			<div
 				v-if="question.meta && question.meta.easy"
-				class="flex items-center gap-x-9px lt-sm:hidden"
+				class="flex items-center  lt-sm:hidden"
 			>
 				<div
 					@click="goToStart"
@@ -505,7 +507,7 @@
 						class=""
 					>
 						<p class="font-500 text-26px lt-xxxl:text-22px leading-34px">Шифр:</p>
-						<div class="flex items-start gap-12px mt-10px lt-sm:flex-wrap">
+						<div class="flex items-start gap-x-9px mt-10px lt-sm:flex-wrap">
 							<div
 								class="flex flex-col items-center gap-y-8px"
 								v-for="(letter, index) in question.meta.value"

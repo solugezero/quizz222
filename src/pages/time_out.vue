@@ -203,6 +203,19 @@
 			translate: 39% -84.5%;
 		}
 	}
+	@media screen and (max-width: 310px) {
+		.final_timeout_window_title{
+			font-size: 14px;
+		}
+		.final_timeout_window_description{
+			font-size: 12px;
+			margin-top: 15px;
+	}
+	.final_timeout_window_button{
+		padding: 10px;
+		font-size: 15px;
+	}
+}
 	.spell {
 		font-family: 'Snell';
 		transform: translateX(-50%) rotate(-2deg);
