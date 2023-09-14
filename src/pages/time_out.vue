@@ -176,6 +176,10 @@
 		}
 	}
 	@media screen and (max-width: 450px) {
+		.final_bfuLogo{
+			top: 44px;
+			width: 150px;
+		}
 		.final_timeout_window {
 			width: 60vw;
 		}
@@ -183,17 +187,20 @@
 			font-size: 19px;
 		}
 		.final_timeout_window_description{
-			font-size: 17px;
+			font-size: 16px;
+			margin-top: 15px;
 		}.final_timeout_window_button{
 			padding: 14px;
 			margin-top: 16px;
 		}
 		.final_timeout_pusskin-full{
-			width: 57vw;
+			position: absolute;
+			min-width: 98vw;
+			translate: -40%;
 		}
 		.final_timeout_pusskin-hand{
-			width: 12.2vw;
-			translate: 65% -84.5%;
+			width: 20vw;
+			translate: 39% -84.5%;
 		}
 	}
 	.spell {
