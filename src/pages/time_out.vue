@@ -111,18 +111,42 @@
 				}
 				&_description{
 					font-weight: 400;
-					font-size: 23px;
+					font-size: 24px;
 					line-height: 130%;
-					margin-top: 15px;
+					margin-top: 18px;
 				}
 				&_button{
-					padding: 20px;
+					padding: 30px;
 					margin-top: 32px;
 					&-title{
-
+						font-size: 24px;
+						padding: 5px;
+						margin: 0;
 					}
 				}
 			}
+		}
+	}
+	@media screen and (max-width: 1610px) {		
+
+	}.final_timeout_window_button{
+			padding: 15px;
+			margin-top: 22px;
+		}
+	@media screen and (max-width: 1450px) {
+		.final_timeout_window {
+			width: 41vw;
+			padding: 7%;
+		}
+		.final_timeout_window_title{
+			font-size: 27px;
+		}
+		.final_timeout_window_description{
+			font-size: 20px;
+			margin-top: 4%;
+		}.final_timeout_window_button{
+			padding: 17px;
+			margin-top: 25px;
 		}
 	}
 	@media screen and (max-width: 1230px) {
