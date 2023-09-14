@@ -1,7 +1,6 @@
 <script setup>
 	import { gameGetQuestionAnswers } from '~/api'
 	import lodash from 'lodash'
-
 	const store = useMainStore()
 	const { totalGameTime, superGameError, showSuperGameEnd, currentPoints, gameStarted, isSuperGame, easyMode, currentQuestionNumber, currentQuestion } = storeToRefs(store)
 	const { counter, pause, resume, reset, isActive } = useInterval(1000, {
@@ -21,6 +20,12 @@
 			emits('answered', true)
 			emits('timerReset')
 		}, 20500)
+	}
+
+	const onPressDeleteOrBackspace = async (idx) => {
+		letterModel.value[idx] = ''
+		let newInput = document.getElementById(`input__${idx - 1}`)
+		newInput?.focus()
 	}
 
 	const emits = defineEmits(['answered', 'timerStop', 'timerReset'])
@@ -277,7 +282,7 @@
 	<div class="flex flex-col w-screen items-center max-h-90vh relative z-1">
 		<div
 			v-if="question.meta && !question.meta.easy"
-			class="flex items-center  scale-90 sm:hidden w-100%"
+			class="flex items-center scale-90 sm:hidden w-100%"
 			:class="{ 'pointer-events-none!': answerEmitting }"
 		>
 			<div class="timer bg-white lt-xxxl:h-55px! lt-xxxl:max-w-310px q-shadow-sm lt-xxxl:p-10px!">
@@ -312,7 +317,7 @@
 					{{ totalGameTime - time }}
 				</p>
 			</div>
-			<div style="width: 3.2vw;"></div>
+			<div style="width: 3.2vw"></div>
 			<div
 				v-if="question.type !== 'VALUE'"
 				class="bg-white w-98px lt-xxxl:w-76px lt-xxxl:h-55px! py-12px border-2px border-#C9C9C9 flex flex-col items-center justify-center q-shadow-sm"
@@ -320,7 +325,7 @@
 				<p class="text-22px lt-xxxl:text-16px font-500 text-#1E2947 leading-130%">+{{ totalGameTime }}</p>
 				<p class="text-18px lt-xxxl:text-14px text-#C9C9C9 leading-130% mt-2px">доп.сек</p>
 			</div>
-			<div style="width: 3.2vw;"></div>
+			<div style="width: 3.2vw"></div>
 
 			<div class="bg-white w-98px lt-xxxl:w-76px lt-xxxl:h-55px! py-12px border-2px border-#C9C9C9 flex flex-col items-center justify-center q-shadow-sm">
 				<p class="text-22px lt-xxxl:text-16px font-500 text-#1E2947 leading-130%">{{ currentPoints }}</p>
@@ -329,7 +334,7 @@
 		</div>
 		<div
 			v-if="question.meta && question.meta.easy"
-			class="flex items-center  scale-90 sm:hidden w-full"
+			class="flex items-center scale-90 sm:hidden w-full"
 			:class="{ 'pointer-events-none!': answerEmitting }"
 		>
 			<div
@@ -341,7 +346,7 @@
 					class="w-46px h-30px"
 				/>
 			</div>
-			<div style="width: 3.2vw;"></div>
+			<div style="width: 3.2vw"></div>
 
 			<div
 				v-if="question.type !== 'VALUE'"
@@ -350,7 +355,7 @@
 				<p class="text-22px lt-xxxl:text-16px font-500 text-#1E2947 leading-130%">+{{ totalGameTime }}</p>
 				<p class="text-18px lt-xxxl:text-14px text-#C9C9C9 leading-130% mt-2px">доп.сек</p>
 			</div>
-			<div style="width: 3.2vw;"></div>
+			<div style="width: 3.2vw"></div>
 
 			<div class="bg-white w-98px lt-xxxl:w-76px lt-xxxl:h-55px! py-12px border-2px border-#C9C9C9 flex flex-col items-center justify-center q-shadow-sm">
 				<p class="text-22px lt-xxxl:text-16px font-500 text-#1E2947 leading-130%">{{ currentPoints }}</p>
@@ -402,7 +407,7 @@
 						{{ totalGameTime - time }}
 					</p>
 				</div>
-				<div style="width: 3.2vw;"></div>
+				<div style="width: 3.2vw"></div>
 
 				<div
 					v-if="question.type !== 'VALUE'"
@@ -411,7 +416,7 @@
 					<p class="text-22px lt-xxxl:text-16px font-500 text-#1E2947 leading-130%">+{{ totalGameTime }}</p>
 					<p class="text-18px lt-xxxl:text-14px text-#C9C9C9 leading-130% mt-2px">доп.сек</p>
 				</div>
-				<div style="width: 3.2vw;"></div>
+				<div style="width: 3.2vw"></div>
 
 				<div class="bg-white w-98px lt-xxxl:w-76px lt-xxxl:h-55px! py-12px border-2px border-#C9C9C9 flex flex-col items-center justify-center q-shadow-sm">
 					<p class="text-22px lt-xxxl:text-16px font-500 text-#1E2947 leading-130%">{{ currentPoints }}</p>
@@ -420,7 +425,7 @@
 			</div>
 			<div
 				v-if="question.meta && question.meta.easy"
-				class="flex items-center  lt-sm:hidden"
+				class="flex items-center lt-sm:hidden"
 			>
 				<div
 					@click="goToStart"
@@ -527,10 +532,12 @@
 								>
 									<input
 										class="h-full w-full text-center text-26px lt-xxxl:text-22px font-100 placeholder:text-#787F91 uppercase hover:placeholder:text-#fff focus:placeholder:text-#fff"
+										:id="`input__${index}`"
 										maxlength="1"
 										v-model="letterModel[index]"
 										placeholder="+"
 										@input="letterHandler($event, index)"
+										@keydown.delete="onPressDeleteOrBackspace(index)"
 									/>
 								</div>
 							</div>

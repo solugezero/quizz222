@@ -106,12 +106,12 @@
 				width: 31.25vw;
 				&_title{
 					font-weight: 500;
-					font-size: 34px;
+					font-size: 29px;
 					line-height: 130%;
 				}
 				&_description{
 					font-weight: 400;
-					font-size: 24px;
+					font-size: 22px;
 					line-height: 130%;
 					margin-top: 18px;
 				}
